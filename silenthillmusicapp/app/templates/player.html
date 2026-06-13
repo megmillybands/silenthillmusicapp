@@ -1,0 +1,168 @@
+{% extends "index.html" %}
+
+{% block title %}
+Silent Hill | Player
+{% endblock title %}
+
+{% block content %}
+
+<div id="playing-song" data-id="{{ song.id }}"></div>
+
+<h1 id="songtitleheader">{{ song.title }}</h1>
+
+<audio id="audio-player" controls autoplay>
+    <source id="audio-source" src="{{ song.audio_file.url }}">
+    Your browser does not support this audio element.
+</audio>
+<button id="prev-btn">&#129190;</button>
+<button id="next-btn">&#129191;</button>
+<label>
+    <input type="checkbox" id="loop-song">
+    loop
+</label>
+
+{% if song.album.id == 1 %}
+<ul id="playlist">
+    {% for track in albumone %}
+    <li
+        data-id="{{ track.id }}"
+        data-src="{{ track.audio_file.url }}"
+        data-title="{{ track.title }}"
+        data-album="{{ track.album }}"
+        data-artwork="{{ track.album.album_cover.url }}"
+        class="track-item"
+    >
+        {{ track.title }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% elif song.album.id == 2 %}
+<ul id="playlist">
+    {% for track in albumtwo %}
+    <li
+        data-id="{{ track.id }}"
+        data-src="{{ track.audio_file.url }}"
+        data-title="{{ track.title }}"
+        data-album="{{ track.album }}"
+        data-artwork="{{ track.album.album_cover.url }}"
+        class="track-item"
+    >
+        {{ track.title }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% elif song.album.id == 3 %}
+<ul id="playlist">
+    {% for track in albumthree %}
+    <li
+        data-id="{{ track.id }}"
+        data-src="{{ track.audio_file.url }}"
+        data-title="{{ track.title }}"
+        data-album="{{ track.album }}"
+        data-artwork="{{ track.album.album_cover.url }}"
+        class="track-item"
+    >
+        {{ track.title }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+<script>
+
+    const songTitleHeader = document.getElementById('songtitleheader');
+    const audioPlayer = document.getElementById('audio-player');
+    const audioSource = document.getElementById('audio-source');
+    const trackItems = document.querySelectorAll('.track-item');
+    const songId = parseInt(
+        document.getElementById('playing-song').dataset.id
+    );
+    let currentIndex = Array.from(trackItems).findIndex(
+        track => track.dataset.id == "{{ song.id }}"
+    );
+    const loopCheckbox = document.getElementById('loop-song');
+
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: "{{ title }}",
+            artist: "{{ artist }}",
+            album: "{{ album }}",
+            artwork: [
+                {
+                    src: "{{ artwork_url }}",
+                    sizes: "800x735",
+                    type: "image/jpeg",
+                }
+            ]
+        });
+        navigator.mediaSession.setActionHandler('nexttrack', () => {
+            playSong(currentIndex + 1);
+        });
+        navigator.mediaSession.setActionHandler('previoustrack', () => {
+            playSong(currentIndex - 1);
+        });
+    }
+
+    function playSong(index) {
+        if (index >= trackItems.length) {
+            index = 0;
+        };
+
+        currentIndex = index;
+        const track = trackItems[index];
+        songTitleHeader.textContent = track.dataset.title;
+        audioSource.src = track.dataset.src;
+        updateMediaSession(track);
+        audioPlayer.load();
+        audioPlayer.play();
+    };
+
+    function updateMediaSession(track) {
+        if (!('mediaSession' in navigator)) {
+            return;
+        }
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.dataset.title,
+            artist: "Akira Yamaoka",
+            album: track.dataset.album,
+            artwork: [
+                {
+                    src: track.dataset.artwork,
+                    sizes: "800x735",
+                    type: "image/jpeg",
+                }
+            ],
+        });
+    }
+
+    trackItems.forEach((item, songId) => {
+        item.addEventListener('click', () => {
+            playSong(songId);
+        });
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+        playSong(currentIndex + 1);
+    });
+
+    audioPlayer.addEventListener('play', () => navigator.mediaSession.playbackState = 'playing');
+    audioPlayer.addEventListener('pause', () => navigator.mediaSession.playbackState = 'paused');
+
+    loopCheckbox.addEventListener('change', () => {
+        audioPlayer.loop = loopCheckbox.checked;
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+        playSong(currentIndex + 1);
+    });
+    document.getElementById('prev-btn').addEventListener('click', () => {
+        playSong(currentIndex - 1);
+    });
+
+</script>
+
+{% endblock content %}
