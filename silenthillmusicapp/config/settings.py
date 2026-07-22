@@ -20,8 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    'cloudinary',
     'django.contrib.staticfiles',
+    'cloudinary',
     'app',
 ]
 
@@ -100,6 +100,7 @@ CLOUDINARY_STORAGE = {
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
