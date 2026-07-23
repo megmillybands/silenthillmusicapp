@@ -4,9 +4,10 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from app.models import Album, Song
 
 def populate_database():
+    from app.models import Album, Song
+    
     print("Populating the database with albums and songs...")
 
     sh1, _ = Album.objects.get_or_create(name='Silent Hill 1', album_cover='Silent_Hill_Complete_Soundtrack_Ultimate_Edition_wthiem.jpg')
