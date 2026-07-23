@@ -11,7 +11,7 @@ Silent Hill | Player
 <h1 id="songtitleheader">{{ song.title }}</h1>
 
 <audio id="audio-player" controls autoplay>
-    <source id="audio-source" src="{{ song.audio_file.url }}">
+    <source id="audio-source" src="{{ song.audio_url }}">
     Your browser does not support this audio element.
 </audio>
 <button id="prev-btn">&#129190;</button>
@@ -26,10 +26,10 @@ Silent Hill | Player
     {% for track in albumone %}
     <li
         data-id="{{ track.id }}"
-        data-src="{{ track.audio_file.url }}"
+        data-src="{{ track.audio_url }}"
         data-title="{{ track.title }}"
         data-album="{{ track.album }}"
-        data-artwork="{{ track.album.album_cover.url }}"
+        data-artwork="{{ track.artwork_url }}"
         class="track-item"
     >
         {{ track.title }}
@@ -42,10 +42,10 @@ Silent Hill | Player
     {% for track in albumtwo %}
     <li
         data-id="{{ track.id }}"
-        data-src="{{ track.audio_file.url }}"
+        data-src="{{ track.audio_url }}"
         data-title="{{ track.title }}"
         data-album="{{ track.album }}"
-        data-artwork="{{ track.album.album_cover.url }}"
+        data-artwork="{{ track.artwork_url }}"
         class="track-item"
     >
         {{ track.title }}
@@ -58,10 +58,10 @@ Silent Hill | Player
     {% for track in albumthree %}
     <li
         data-id="{{ track.id }}"
-        data-src="{{ track.audio_file.url }}"
+        data-src="{{ track.audio_url }}"
         data-title="{{ track.title }}"
         data-album="{{ track.album }}"
-        data-artwork="{{ track.album.album_cover.url }}"
+        data-artwork="{{ track.artwork_url }}"
         class="track-item"
     >
         {{ track.title }}
