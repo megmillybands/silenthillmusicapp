@@ -6,10 +6,13 @@ Silent Hill | Home
 
 {% block content %}
 
-<h1>Welcome to your Silent Hill soundtrack hub!</h1>
+<h1>SILENT HILL</h1>
+<h2>Soundtrack Player</h2>
 
-<a href="{% url 'silenthillone' %}">Silent Hill 1</a>
-<a href="{% url 'silenthilltwo' %}">Silent Hill 2</a>
-<a href="{% url 'silenthillthree' %}">Silent Hill 3</a>
+<div id="album-list">
+    <a href="{% url 'silenthillone' %}">Silent Hill 1</a>
+    <a href="{% url 'silenthilltwo' %}">Silent Hill 2</a>
+    <a href="{% url 'silenthillthree' %}">Silent Hill 3</a>
+</div>
 
 {% endblock content %}

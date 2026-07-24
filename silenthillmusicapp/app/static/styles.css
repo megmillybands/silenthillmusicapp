@@ -1,3 +1,126 @@
+@font-face {
+    font-family: 'Silent Hill Regular';
+    src: url('fonts/slnthln-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Silent Hill Condensed';
+    src: url('fonts/slnthlc-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Silent Hill Extended';
+    src: url('fonts/slnthle-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Palatino';
+    src: url('fonts/palr45w-webfont.woff') format('woff');
+}
+
 body {
-    background-color: orange;
+    background-image: url('images/wp13087594.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Silent Hill Extended';
+    font-size: 50px;
+    color: rgb(225, 225, 225);
+    text-shadow: -2px -1px 0px rgb(25, 25, 25);
+    text-align: center;
+    margin-top: 5vh;
+}
+
+h2 {
+    font-family: 'Silent Hill Regular';
+    font-size: 40px;
+    color: rgb(225, 225, 225);
+    text-shadow: -2px -1px 0px rgb(25, 25, 25);
+    text-align: center;
+}
+
+li {
+    font-family: 'Palatino';
+    font-size: 40px;
+    color: rgb(225, 225, 225);
+    list-style: none;
+    border: 1px solid rgba(25, 25, 25, 0.5);
+    padding: 5px;
+}
+
+a {
+    font-family: 'Palatino';
+    font-size: 30px;
+    color:rgb(225, 225, 225);
+    text-decoration: none;
+}
+
+#album-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#album-list a {
+    margin: 40px;
+    display: inline-block;
+    padding: 5px 50px;
+    color: rgb(25, 25, 25);
+    font-size: 50px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    text-shadow: -2px -1px 2px rgb(225, 225, 225);
+}
+
+#album-list a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 40%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0.25;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#album-list a:hover::before {
+    opacity: 1;
+}
+
+.album-tracklist {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    justify-self: center;
+    padding: 50px;
+    width: 75vw;
+    background: rgba(255, 60, 60, 0.5);
+    margin-top: 5vh;
+}
+
+.album-tracklist li {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.album-tracklist li:hover {
+    background: rgba(255, 175, 60, 0.5);
+}
+
+.album-tracklist li a {
+    display: flex;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
 }

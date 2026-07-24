@@ -6,7 +6,10 @@ Silent Hill | Game 3
 
 {% block content %}
 
-<ul>
+<h1>SILENT HILL 3</h1>
+<h2>Tracklist</h2>
+
+<ul class="album-tracklist">
     {% for song in songs %}
     <li>
         <a href="{% url 'player' song.id %}">{{ song.title }}</a>
